@@ -22,15 +22,18 @@ class commands(object):
         try:
             command_index = self.command_array.index(command)
             return self.command_array[command_index + 1]
-        except Exception as e:
+        except ValueError:
             print('Command ' +command+' not found')
-            raise
+            return None
 
     def grab_command_info(self, command):
         path = self.grab_command_path(command)
-        with open(path, 'r') as f:
-            command_info = f.read()
-        return command_info
+        if(path == None):
+            return 'No such command'
+        else:
+            with open(path, 'r') as f:
+                command_info = f.read()
+            return command_info
 
     def help_command(self, command):
         self.info = self.grab_command_info(command)
