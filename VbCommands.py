@@ -1,9 +1,11 @@
+import VbCommon
 class commands(object):
     """docstring for commands."""
     def __init__(self, path):
         super(commands, self).__init__()
         self.path = path
         self.command_array = []
+        self.VbCommon = VbCommon.common
         self.read_commands()
 
     def read_commands(self):
@@ -40,4 +42,8 @@ class commands(object):
             for i in tmp:
                 self.info_array.append(i)
         self.help_string = ''
-    def search_help(self, )
+        name = self.VbCommon.search_array(self.info_array, 'name')
+        desc = self.VbCommon.search_array(self.info_array, 'description')
+        use = self.VbCommon.search_array(self.info_array, 'usage')
+        self.help_string = 'Help for command ' + str(name) + '. ' + str(name) + ' ' + str(description) + '. Usage: ' + str(use)
+        return self.help_string
