@@ -18,7 +18,6 @@ class commands(object):
             for i in tmp:
                 self.command_array.append(i)
 
-
     def grab_command_path(self, command):
         try:
             command_index = self.command_array.index(command)
@@ -32,6 +31,7 @@ class commands(object):
         with open(path, 'r') as f:
             command_info = f.read()
         return command_info
+
     def help_command(self, command):
         self.info = self.grab_command_info(command)
         self.info = self.info.split('\n')

@@ -1,12 +1,12 @@
-with open('settings/settings.txt', 'r') as f:
-    read_data = f.read()
-
+import VbCommon
 class settings(object):
-    """docstring for settings."""
     def __init__(self, path):
+        """docstring for settings."""
         super(settings, self).__init__()
         self.path = path
         self.read_settings()
+        self.common = VbCommon.common()
+
     def read_settings(self):
         with open(self.path, 'r') as f:
             self.data = f.read()
@@ -27,11 +27,5 @@ class settings(object):
             print(tmp)
 
     def grab_setting(self, setting):
-        try:
-            self.setting_index = self.settings_lst.index(setting)
-            self.setting_value = self.settings_lst[self.setting_index + 1]
-            return self.setting_value
-        except Exception as e:
-            print(e)
-            print('Can not find setting: ' + str(setting))
-            pass
+        search = self.common.search_array(self.settings_lst, setting)
+        return search
