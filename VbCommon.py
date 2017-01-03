@@ -9,4 +9,4 @@ class common(object):
             return array[array_index + 1]
         except Exception as e:
             print('Property ' +search+' not found in ' + str(array))
-            raise
+            return 'No such command'

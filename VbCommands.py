@@ -5,7 +5,7 @@ class commands(object):
         super(commands, self).__init__()
         self.path = path
         self.command_array = []
-        self.VbCommon = VbCommon.common
+        self.VbCommon = VbCommon.common()
         self.read_commands()
 
     def read_commands(self):
@@ -45,8 +45,11 @@ class commands(object):
             for i in tmp:
                 self.info_array.append(i)
         self.help_string = ''
-        name = self.VbCommon.search_array(self.info_array, 'name')
-        desc = self.VbCommon.search_array(self.info_array, 'description')
-        use = self.VbCommon.search_array(self.info_array, 'usage')
-        self.help_string = 'Help for command ' + str(name) + '. ' + str(name) + ' ' + str(description) + '. Usage: ' + str(use)
+        self.name = self.VbCommon.search_array(self.info_array, 'name')
+        self.desc = self.VbCommon.search_array(self.info_array, 'description')
+        self.use = self.VbCommon.search_array(self.info_array, 'usage')
+        if(self.name == 'No such command' and self.desc 'No such command' and self.use == 'No such command'):
+            self.help_string = 'No such command' + str(command)
+        else:
+            self.help_string = 'Help for command ' + str(self.name) + '. ' + str(self.name) + ' ' + str(self.desc) + '. Usage: ' + str(self.use)
         return self.help_string
