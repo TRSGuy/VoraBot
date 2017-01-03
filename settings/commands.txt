@@ -1,0 +1,2 @@
+!wikipedia=./settings/commands/wikipedia.txt
+!requestsong=./settings/commands/requestsong.txt

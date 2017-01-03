@@ -1,0 +1,3 @@
+name=requestsong
+description=Adds song to request queue
+usage=!requestsong <Search Query|Media Link>

@@ -1,0 +1,6 @@
+server=irc.chat.twitch.tv
+port=6667
+channel_name=#thatrandomswedishguy
+oauth=btynhva14nvmfxd9gbwijwmxedixna
+twitch_name=ThatRandomSwedishGuy
+commands_path=./settings/commands.txt
