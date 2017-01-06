@@ -43,5 +43,5 @@ class settings(object):
         if(settings == 'oauth'):
             search = self.grab_oauth()
         else:
-            search = self.common.search_array(self.settings_lst, setting)
+            search = self.common.search_array(self.settings_lst, setting, 'VbSettings')
         return search
