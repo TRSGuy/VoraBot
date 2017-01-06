@@ -48,7 +48,7 @@ class commands(object):
         self.name = self.VbCommon.search_array(self.info_array, 'name')
         self.desc = self.VbCommon.search_array(self.info_array, 'description')
         self.use = self.VbCommon.search_array(self.info_array, 'usage')
-        if(self.name == 'No such command' and self.desc 'No such command' and self.use == 'No such command'):
+        if(self.name == 'No such command' and self.desc == 'No such command' and self.use == 'No such command'):
             self.help_string = 'No such command' + str(command)
         else:
             self.help_string = 'Help for command ' + str(self.name) + '. ' + str(self.name) + ' ' + str(self.desc) + '. Usage: ' + str(self.use)

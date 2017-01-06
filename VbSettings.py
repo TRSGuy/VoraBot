@@ -1,4 +1,5 @@
 import VbCommon
+import os
 class settings(object):
     def __init__(self, path):
         """docstring for settings."""
@@ -26,6 +27,22 @@ class settings(object):
                 tmp = tmp + i  + ' \n'
             print(tmp)
 
+    def grab_oauth(self):
+        path = grab_setting('oauth_path')
+        if(os.path.exist(path)):
+            with open(path, 'r') as f:
+                data = f.read()
+            return data
+        else:
+            print('The oauth key was not found at the specified path')
+            oauth = input_raw('Please enter your oauth key without the oauth: part: ')
+            with open(path, 'a') as f:
+                f.write(oauth)
+            return oauth
+
     def grab_setting(self, setting):
-        search = self.common.search_array(self.settings_lst, setting)
+        if(settings == 'oauth'):
+            search = self.grab_oauth()
+        else:
+            search = self.common.search_array(self.settings_lst, setting)
         return search
