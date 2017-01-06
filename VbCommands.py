@@ -45,9 +45,9 @@ class commands(object):
             for i in tmp:
                 self.info_array.append(i)
         self.help_string = ''
-        self.name = self.VbCommon.search_array(self.info_array, 'name')
-        self.desc = self.VbCommon.search_array(self.info_array, 'description')
-        self.use = self.VbCommon.search_array(self.info_array, 'usage')
+        self.name = self.VbCommon.search_array(self.info_array, 'name', 'VbCommands')
+        self.desc = self.VbCommon.search_array(self.info_array, 'description', 'VbCommands')
+        self.use = self.VbCommon.search_array(self.info_array, 'usage', 'VbCommands')
         if(self.name == 'No such command' and self.desc == 'No such command' and self.use == 'No such command'):
             self.help_string = 'No such command' + str(command)
         else:

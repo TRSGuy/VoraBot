@@ -1,5 +1,4 @@
-import VbCommon
-import os
+import VbCommon, os
 class settings(object):
     def __init__(self, path):
         """docstring for settings."""
