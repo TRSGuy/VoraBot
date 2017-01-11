@@ -34,13 +34,13 @@ class settings(object):
             return data
         else:
             print('The oauth key was not found at the specified path')
-            oauth = input_raw('Please enter your oauth key without the oauth: part: ')
+            oauth = input_raw('Please enter your oauth key without the "oauth:" part: ')
             with open(path, 'a') as f:
                 f.write(oauth)
             return oauth
 
     def grab_setting(self, setting):
-        if(settings == 'oauth'):
+        if(setting == 'oauth'):
             search = self.grab_oauth()
         else:
             search = self.common.search_array(self.settings_lst, setting, 'VbSettings')

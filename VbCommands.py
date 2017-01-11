@@ -5,7 +5,7 @@ class commands(object):
         super(commands, self).__init__()
         self.path = path
         self.command_array = []
-        self.VbCommon = VbCommon.common()
+        self.VbCommon = VbCommon.common
         self.read_commands()
 
     def read_commands(self):
@@ -22,18 +22,15 @@ class commands(object):
         try:
             command_index = self.command_array.index(command)
             return self.command_array[command_index + 1]
-        except ValueError:
+        except Exception as e:
             print('Command ' +command+' not found')
-            return None
+            raise
 
     def grab_command_info(self, command):
         path = self.grab_command_path(command)
-        if(path == None):
-            return 'No such command'
-        else:
-            with open(path, 'r') as f:
-                command_info = f.read()
-            return command_info
+        with open(path, 'r') as f:
+            command_info = f.read()
+        return command_info
 
     def help_command(self, command):
         self.info = self.grab_command_info(command)
@@ -45,11 +42,8 @@ class commands(object):
             for i in tmp:
                 self.info_array.append(i)
         self.help_string = ''
-        self.name = self.VbCommon.search_array(self.info_array, 'name', 'VbCommands')
-        self.desc = self.VbCommon.search_array(self.info_array, 'description', 'VbCommands')
-        self.use = self.VbCommon.search_array(self.info_array, 'usage', 'VbCommands')
-        if(self.name == 'No such command' and self.desc == 'No such command' and self.use == 'No such command'):
-            self.help_string = 'No such command' + str(command)
-        else:
-            self.help_string = 'Help for command ' + str(self.name) + '. ' + str(self.name) + ' ' + str(self.desc) + '. Usage: ' + str(self.use)
+        name = self.VbCommon.search_array(self.info_array, 'name')
+        desc = self.VbCommon.search_array(self.info_array, 'description')
+        use = self.VbCommon.search_array(self.info_array, 'usage')
+        self.help_string = 'Help for command ' + str(name) + '. ' + str(name) + ' ' + str(description) + '. Usage: ' + str(use)
         return self.help_string

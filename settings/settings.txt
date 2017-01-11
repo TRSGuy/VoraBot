@@ -1,6 +1,6 @@
 server=irc.chat.twitch.tv
 port=6667
 channel_name=#thatrandomswedishguy
+oauth_path=./settings/key.oauth
 twitch_name=ThatRandomSwedishGuy
 commands_path=./settings/commands.txt
-oauth_path=./settings/key.oauth
