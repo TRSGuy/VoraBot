@@ -10,24 +10,24 @@ class irc(object):
         self.twitch_name = twitch_name
         self.channel_name = channel_name
 
-    def send_to_server(self, message): #converts the message into a form which the irc server accepts
+    def send_to_server(self, message): #converts the message into a form which the irc server accepts and then sends it. This is usefull because the rest of the application doesn't have to deal with bytearrays
         self.regex_message = message + '\r\n' #appends \r\n to the message to make the irc client actually send the messages
         self.byte_message = self.regex_message.encode('utf-8') #Convert the message into a bytearray. This is requred as of python 3
         self.s.send(self.byte_message) #Call the socket.send function to send the converted message.
 
-    def send_msg(self, message):
-        self.privmsg = 'PRIVMSG ' + self.channel_name + ' :' + message
+    def send_msg(self, message): # This function appends the neccesary information that the irc server requires to deliver the messages successfully to the right place.
+        self.privmsg = 'PRIVMSG ' + self.channel_name + ' :' + message #Tells the server that this is a text message that is supposed to be sent to the chann self.channel_name
         self.send_to_server(self.privmsg)
 
-    def connect(self):
-        self.s.connect((self.server, self.port))
+    def connect(self): #This function uses all of the things that was passed into the class and uses it to make a connection through the socket to the irc server
+        self.s.connect((self.server, self.port)) 
         self.send_to_server('PASS ' + self.oauth)
         self.send_to_server('NICK ' + self.twitch_name)
         self.send_to_server('JOIN ' + self.channel_name)
         print('Done authenticating with server')
-        self.irc_loop()
+        self.irc_loop() #See self.irc_loop()
 
-    def get_args(self, message):
+    def get_args(self, message): #This function gets all the arguments following a command and append them to an array
         try:
             tmp = message.split(' ')
             tmplen = len(tmp)
