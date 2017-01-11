@@ -29,29 +29,29 @@ class irc(object):
 
     def get_args(self, message): #This function gets all the arguments following a command and append them to an array
         try:
-            tmp = message.split(' ')
-            tmplen = len(tmp)
-            tmp = tmp[1:tmplen]
-            return tmp
-        except(IndexError, AttributeError):
+            tmp = message.split(' ') #splits the message on every space
+            tmplen = len(tmp) #Checks the length of the array of arguments
+            tmp = tmp[1:tmplen] #Removes the first entry of the list
+            return tmp #returns the list
+        except(IndexError, AttributeError): #If there is no arguments then return none
             return None
 
-    def get_nick(self, text):
-        tmp = text.split('@')
+    def get_nick(self, text): #Grabs the nickname of the person who sent the message. this argument takes the raw irc message then returns the nick
+        tmp = text.split('@') # I can't remember exactly what this does but I know it has a role in grabbing the nick from a split strings
         try:
-            self.final = tmp[0].split('!')[1]
+            self.final = tmp[0].split('!')[1] #idek
             return self.final
         except(IndexError):
             return None
 
-    def get_msg(self, text):
+    def get_msg(self, text): #This grabs the message from the raw irc message
         try:
             split = text.split(':')[2]
             return split
         except(IndexError):
             return None
-
-    def irc_loop(self):
+ 
+    def irc_loop(self): #this is the main socket loop. The reason this is in a function is because it helps when using 
         while 1:
             self.text = self.s.recv(2048)
             self.strtext = str(self.text)
