@@ -3,17 +3,17 @@ class irc(object):
     """docstring for irc."""
     def __init__(self, server, port, oauth, twitch_name, channel_name):
         super(irc, self).__init__()
-        self.s = socket.socket()
-        self.server = server
+        self.s = socket.socket() #Instanciate the socket
+        self.server = server #Çhanging the namespace of the arguments parsed when instanciating the irc class 
         self.port = port
         self.oauth = str('oauth:') + oauth
         self.twitch_name = twitch_name
         self.channel_name = channel_name
 
-    def send_to_server(self, message):
-        self.regex_message = message + '\r\n'
-        self.byte_message = self.regex_message.encode('utf-8')
-        self.s.send(self.byte_message)
+    def send_to_server(self, message): #converts the message into a form which the irc server accepts
+        self.regex_message = message + '\r\n' #appends \r\n to the message to make the irc client actually send the messages
+        self.byte_message = self.regex_message.encode('utf-8') #Convert the message into a bytearray. This is requred as of python 3
+        self.s.send(self.byte_message) #Call the socket.send function to send the converted message.
 
     def send_msg(self, message):
         self.privmsg = 'PRIVMSG ' + self.channel_name + ' :' + message
