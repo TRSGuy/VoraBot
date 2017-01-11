@@ -4,7 +4,7 @@ class irc(object):
     def __init__(self, server, port, oauth, twitch_name, channel_name):
         super(irc, self).__init__()
         self.s = socket.socket() #Instanciate the socket
-        self.server = server #Çhanging the namespace of the arguments parsed when instanciating the irc class 
+        self.server = server #Ã‡hanging the namespace of the arguments parsed when instanciating the irc class 
         self.port = port
         self.oauth = str('oauth:') + oauth
         self.twitch_name = twitch_name
@@ -50,8 +50,7 @@ class irc(object):
             return split
         except(IndexError):
             return None
- 
-    def irc_loop(self): #this is the main socket loop. The reason this is in a function is because it helps when using 
+    def irc_loop(self): #this is the main socket loop. The reason this is in a function is because it helps when using threading
         while 1:
             self.text = self.s.recv(2048)
             self.strtext = str(self.text)
