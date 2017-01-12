@@ -4,7 +4,7 @@ class irc(object):
     def __init__(self, server, port, oauth, twitch_name, channel_name):
         super(irc, self).__init__()
         self.s = socket.socket() #Instanciate the socket
-        self.server = server #Ã‡hanging the namespace of the arguments parsed when instanciating the irc class 
+        self.server = server #Çhanging the namespace of the arguments parsed when instanciating the irc class 
         self.port = port
         self.oauth = str('oauth:') + oauth
         self.twitch_name = twitch_name
@@ -52,12 +52,12 @@ class irc(object):
             return None
     def irc_loop(self): #this is the main socket loop. The reason this is in a function is because it helps when using threading
         while 1:
-            self.text = self.s.recv(2048)
-            self.strtext = str(self.text)
-            self.strtext = self.strtext[0:len(self.strtext) - 5]
-            self.nick = self.get_nick(self.strtext)
-            self.message = self.get_msg(self.strtext)
-            self.args = self.get_args(self.message)
+            self.text = self.s.recv(2048) # set self.text to the raw irc data that comes through the socket
+            self.strtext = str(self.text) # strtext is self.text converted from a bytearray to a string. This makes things easier when doing elif statements and other operations that are type specific
+            self.strtext = self.strtext[0:len(self.strtext) - 5] # I can't for the life of me figure out what is going on here. I am guessing that it is removin some form of artifact left behind by the type conversion. Allthough I am not sure
+            self.nick = self.get_nick(self.strtext) # Grabs the nick from the raw irc message
+            self.message = self.get_msg(self.strtext) # Grabs only the message from the raw irc message
+            self.args = self.get_args(self.message) # Grabs all the following words after the first word in a message and adds them to this (self.args) array
             self.command = 'None'
             try:
                 self.commandBool = self.message.startswith('!')
@@ -65,7 +65,7 @@ class irc(object):
                 self.commandBool = False
             if(self.commandBool):
                 self.command = str(self.message.split(' ')[0])
-
+            #The following lines are for console output. It prints out all vars for the current message. This will later be moved into a PyQtUI
             print('RAW TEXT: ' + self.strtext)
             print('MESSAGE: ' + str(self.message))
             print('NICK: ' + str(self.nick))
